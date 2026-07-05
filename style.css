@@ -1,0 +1,200 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f3f6fb;
+    color:#333;
+}
+
+.header{
+    background:#1565c0;
+    color:#fff;
+    padding:18px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 10px rgba(0,0,0,.2);
+}
+
+.header h2{
+    font-size:24px;
+}
+
+.date{
+    font-size:15px;
+    font-weight:500;
+}
+
+.container{
+    max-width:900px;
+    margin:25px auto;
+    padding:15px;
+}
+
+.card{
+    background:#fff;
+    border-radius:15px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.card h2{
+    color:#1565c0;
+    margin-bottom:15px;
+}
+
+select,
+input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:16px;
+    margin-bottom:15px;
+    outline:none;
+}
+
+select:focus,
+input:focus{
+    border-color:#1565c0;
+}
+
+button{
+    border:none;
+    border-radius:10px;
+    padding:12px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    transition:.3s;
+}
+
+#loadBtn{
+    width:100%;
+    background:#1565c0;
+    color:#fff;
+}
+
+#loadBtn:hover{
+    background:#0d47a1;
+}
+
+#saveBtn{
+    background:#43a047;
+    color:#fff;
+    padding:10px 20px;
+}
+
+#saveBtn:hover{
+    background:#2e7d32;
+}
+
+.toolbar{
+    display:flex;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.toolbar input{
+    flex:1;
+    margin:0;
+}
+
+.student{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#f9f9f9;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:10px;
+}
+
+.student-name{
+    font-weight:600;
+}
+
+.actions{
+    display:flex;
+    gap:8px;
+}
+
+.present{
+    background:#4caf50;
+    color:white;
+}
+
+.present:hover{
+    background:#2e7d32;
+}
+
+.absent{
+    background:#f44336;
+    color:white;
+}
+
+.absent:hover{
+    background:#c62828;
+}
+
+.summary{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.summary div{
+    background:#1565c0;
+    color:#fff;
+    text-align:center;
+    padding:18px;
+    border-radius:12px;
+}
+
+.summary h3{
+    font-size:30px;
+    margin-bottom:5px;
+}
+
+.footer{
+    text-align:center;
+    color:#666;
+    padding:20px;
+    font-size:14px;
+}
+
+@media(max-width:700px){
+
+.header{
+    flex-direction:column;
+    gap:10px;
+}
+
+.toolbar{
+    flex-direction:column;
+}
+
+.summary{
+    grid-template-columns:1fr;
+}
+
+.student{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+}
+
+.actions{
+    width:100%;
+}
+
+.actions button{
+    flex:1;
+}
+
+}

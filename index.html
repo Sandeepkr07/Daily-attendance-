@@ -137,4 +137,123 @@ placeholder="Search Student..."
 
 </div>
 
+
 </div>
+<!-- Attendance Table -->
+
+<div class="card">
+
+<div class="table-header">
+
+<div>Roll</div>
+<div>Student Name</div>
+<div>Status</div>
+
+</div>
+
+<div id="studentList">
+
+<!-- Students JS se aayenge -->
+
+</div>
+
+</div>
+
+<!-- Report Section -->
+
+<div class="card" id="reportCard" style="display:none;">
+
+<h2>Today's Attendance</h2>
+
+<div class="summary">
+
+<div>
+<h3 id="presentCount">0</h3>
+<p>Present</p>
+</div>
+
+<div>
+<h3 id="absentCount">0</h3>
+<p>Absent</p>
+</div>
+
+<div>
+<h3 id="attendancePercent">0%</h3>
+<p>Attendance</p>
+</div>
+
+</div>
+
+<br>
+
+<button id="downloadBtn">
+📄 Download Report
+</button>
+
+<button id="clearBtn">
+🗑 Clear Attendance
+</button>
+
+</div>
+
+<!-- About -->
+
+<div class="card">
+
+<h2>About</h2>
+
+<p>
+
+Daily Attendance System for BEU Students.
+
+Supports
+
+✔ CSE
+
+✔ ECE
+
+✔ Offline Local Storage
+
+✔ Mobile Friendly
+
+✔ Vercel Ready
+
+</p>
+
+</div>
+
+<footer class="footer">
+
+<p>
+
+© 2026 Daily Attendance System
+
+Developed by
+
+<b>Sandeep Kumar</b>
+
+</p>
+
+</footer>
+<!-- Loading Overlay -->
+
+<div id="loading" class="loading" style="display:none;">
+
+<div class="loader"></div>
+
+<p>Loading Attendance...</p>
+
+</div>
+
+<!-- Success Message -->
+
+<div id="toast" class="toast">
+
+Attendance Saved Successfully ✅
+
+</div>
+
+</div>
+
+</body>
+</html>

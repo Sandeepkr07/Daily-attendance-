@@ -195,3 +195,227 @@ const students=[
 "Abhishek Kumar",
 "Sandeep Kumar"
 ];
+];
+
+const branch=document.getElementById("branch");
+const subject=document.getElementById("subject");
+const attendanceArea=document.getElementById("attendanceArea");
+
+branch.addEventListener("change",()=>{
+
+subject.innerHTML="";
+
+let list=[];
+
+if(branch.value=="CSE"){
+list=cseSubjects;
+}
+
+if(branch.value=="ECE"){
+list=eceSubjects;
+}
+
+list.forEach(item=>{
+
+let option=document.createElement("option");
+option.textContent=item;
+option.value=item;
+
+subject.appendChild(option);
+
+});
+
+});
+
+function loadStudents(){
+
+attendanceArea.innerHTML="";
+
+let card=document.createElement("div");
+
+card.className="card";
+
+card.innerHTML=`
+
+<h2>${branch.value} - ${subject.value}</h2>
+
+`;
+
+students.forEach((name,index)=>{
+
+let row=document.createElement("div");
+
+row.className="student";
+
+row.innerHTML=`
+
+<div>
+
+<b>${index+1}.</b>
+
+${name}
+
+</div>
+
+<div class="status">
+
+<button class="green"
+
+onclick="markPresent(${index})">
+
+Present
+
+</button>
+
+<button class="red"
+
+onclick="markAbsent(${index})">
+
+Absent
+
+</button>
+
+</div>
+
+`;
+
+card.appendChild(row);
+
+});
+
+card.innerHTML+=`
+
+<br>
+
+<button class="blue"
+
+onclick="saveAttendance()">
+
+Save Attendance
+
+</button>
+
+`;
+
+attendanceArea.appendChild(card);
+
+}
+
+let attendance={};
+
+function markPresent(id){
+
+attendance[id]="Present";
+
+event.target.parentElement.parentElement.style.background="#d7ffd9";
+
+}
+
+function markAbsent(id){
+
+attendance[id]="Absent";
+
+event.target.parentElement.parentElement.style.background="#ffd6d6";
+
+}
+  function saveAttendance(){
+
+let total=students.length;
+let present=0;
+let absent=0;
+
+students.forEach((name,index)=>{
+
+if(attendance[index]=="Present"){
+present++;
+}else{
+absent++;
+}
+
+});
+
+let percent=((present/total)*100).toFixed(2);
+
+let data={
+date:new Date().toLocaleDateString(),
+branch:branch.value,
+subject:subject.value,
+attendance:attendance,
+present:present,
+absent:absent,
+percentage:percent
+};
+
+localStorage.setItem("BEU_Attendance",JSON.stringify(data));
+
+alert(
+"Attendance Saved Successfully\n\n"+
+"Present : "+present+
+"\nAbsent : "+absent+
+"\nAttendance % : "+percent+"%"
+);
+
+showReport();
+
+}
+
+function showReport(){
+
+let data=JSON.parse(localStorage.getItem("BEU_Attendance"));
+
+if(!data) return;
+
+let report=document.createElement("div");
+
+report.className="card";
+
+report.innerHTML=`
+
+<h2>Attendance Report</h2>
+
+<p><b>Date :</b> ${data.date}</p>
+
+<p><b>Branch :</b> ${data.branch}</p>
+
+<p><b>Subject :</b> ${data.subject}</p>
+
+<p><b>Present :</b> ${data.present}</p>
+
+<p><b>Absent :</b> ${data.absent}</p>
+
+<p><b>Attendance % :</b> ${data.percentage}%</p>
+
+<button class="green" onclick="location.reload()">
+
+New Attendance
+
+</button>
+
+<button class="red" onclick="clearAttendance()">
+
+Clear Data
+
+</button>
+
+`;
+
+attendanceArea.appendChild(report);
+
+}
+
+function clearAttendance(){
+
+localStorage.removeItem("BEU_Attendance");
+
+alert("Attendance Cleared");
+
+location.reload();
+
+}
+
+window.onload=showReport;
+
+</script>
+
+</body>
+</html>

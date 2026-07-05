@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GEC Bhojpur Attendance System</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f2f5fa;
+}
+
+header{
+background:#1565c0;
+color:white;
+padding:18px;
+text-align:center;
+font-size:24px;
+font-weight:bold;
+box-shadow:0 3px 10px rgba(0,0,0,.2);
+}
+
+.container{
+padding:15px;
+}
+
+.card{
+background:white;
+border-radius:15px;
+padding:15px;
+margin-bottom:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+h2{
+margin-bottom:10px;
+color:#1565c0;
+}
+
+select{
+width:100%;
+padding:12px;
+font-size:16px;
+border-radius:8px;
+border:1px solid #ccc;
+margin-top:10px;
+margin-bottom:15px;
+}
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+}
+
+.green{
+background:#4CAF50;
+color:white;
+}
+
+.red{
+background:#f44336;
+color:white;
+}
+
+.blue{
+background:#1565c0;
+color:white;
+}
+
+.student{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px;
+border-bottom:1px solid #ddd;
+}
+
+.status button{
+width:70px;
+margin-left:5px;
+padding:8px;
+font-size:14px;
+}
+
+.hidden{
+display:none;
+}
+
+.footer{
+text-align:center;
+padding:20px;
+font-size:14px;
+color:#555;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+BEU Attendance System
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Select Branch</h2>
+
+<select id="branch">
+
+<option value="">Choose Branch</option>
+
+<option value="CSE">Computer Science Engineering</option>
+
+<option value="ECE">Electronics & Communication</option>
+
+</select>
+
+<h2>Select Subject</h2>
+
+<select id="subject">
+
+<option>Select Branch First</option>
+
+</select>
+
+<button class="blue" onclick="loadStudents()">
+
+Load Attendance
+
+</button>
+
+</div>
+
+<div id="attendanceArea"></div>
+
+<div class="footer">
+
+Developed By Sandeep Kashyap ❤️
+
+</div>
+
+</div>
+
+<script>
+
+const cseSubjects=[
+"Computer Network",
+"Compiler Design",
+"Machine Learning",
+"Cryptography & Network Security",
+"Java Programming",
+"Python Lab",
+"CN Lab",
+"CD Lab"
+];
+
+const eceSubjects=[
+"Analog Electronics and IC",
+"Digital Circuits",
+"Electromagnetic Field Theory",
+"Analog Communication",
+"Electronics Materials",
+"NPTEL-I",
+"AEIC Lab",
+"Digital Circuit Lab",
+"Analog Comm Lab",
+"EMI Lab"
+];
+
+const students=[
+"Rahul Kumar",
+"Aman Kumar",
+"Rohit Kumar",
+"Priya Kumari",
+"Anjali Kumari",
+"Neha Kumari",
+"Abhishek Kumar",
+"Sandeep Kumar"
+];

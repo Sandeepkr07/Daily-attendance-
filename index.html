@@ -1,120 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GEC Bhojpur Attendance System</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Attendance System</title>
 
-<style>
+  <link rel="stylesheet" href="style.css">
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-body{
-background:#f2f5fa;
-}
-
-header{
-background:#1565c0;
-color:white;
-padding:18px;
-text-align:center;
-font-size:24px;
-font-weight:bold;
-box-shadow:0 3px 10px rgba(0,0,0,.2);
-}
-
-.container{
-padding:15px;
-}
-
-.card{
-background:white;
-border-radius:15px;
-padding:15px;
-margin-bottom:15px;
-box-shadow:0 5px 15px rgba(0,0,0,.15);
-}
-
-h2{
-margin-bottom:10px;
-color:#1565c0;
-}
-
-select{
-width:100%;
-padding:12px;
-font-size:16px;
-border-radius:8px;
-border:1px solid #ccc;
-margin-top:10px;
-margin-bottom:15px;
-}
-
-button{
-width:100%;
-padding:14px;
-border:none;
-border-radius:10px;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
-margin-top:10px;
-}
-
-.green{
-background:#4CAF50;
-color:white;
-}
-
-.red{
-background:#f44336;
-color:white;
-}
-
-.blue{
-background:#1565c0;
-color:white;
-}
-
-.student{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:12px;
-border-bottom:1px solid #ddd;
-}
-
-.status button{
-width:70px;
-margin-left:5px;
-padding:8px;
-font-size:14px;
-}
-
-.hidden{
-display:none;
-}
-
-.footer{
-text-align:center;
-padding:20px;
-font-size:14px;
-color:#555;
-}
-
-</style>
-
+  <script defer src="script.js"></script>
 </head>
 
 <body>
 
-<header>
-BEU Attendance System
+<header class="header">
+
+<div class="logo">
+<h2>📚 Daily Attendance</h2>
+</div>
+
+<div class="date" id="todayDate"></div>
+
 </header>
 
 <div class="container">
@@ -129,7 +36,24 @@ BEU Attendance System
 
 <option value="CSE">Computer Science Engineering</option>
 
-<option value="ECE">Electronics & Communication</option>
+<option value="ECE">Electronics & Communication Engineering</option>
+
+</select>
+
+<h2>Select Semester</h2>
+
+<select id="semester">
+
+<option value="">Choose Semester</option>
+
+<option>1st Semester</option>
+<option>2nd Semester</option>
+<option>3rd Semester</option>
+<option>4th Semester</option>
+<option>5th Semester</option>
+<option selected>6th Semester</option>
+<option>7th Semester</option>
+<option>8th Semester</option>
 
 </select>
 
@@ -137,285 +61,80 @@ BEU Attendance System
 
 <select id="subject">
 
-<option>Select Branch First</option>
+<option value="">Select Branch First</option>
 
 </select>
 
-<button class="blue" onclick="loadStudents()">
-
+<button id="loadBtn">
 Load Attendance
+</button>
+
+</div>
+
+<div id="attendanceSection" style="display:none;">
+
+<div class="card">
+
+<h2 id="subjectTitle">
+Attendance
+</h2>
+
+<div class="toolbar">
+
+<input
+type="text"
+id="search"
+placeholder="Search Student..."
+>
+
+<button id="saveBtn">
+
+💾 Save Attendance
 
 </button>
 
 </div>
 
-<div id="attendanceArea"></div>
+<div id="studentList">
 
-<div class="footer">
-
-Developed By Sandeep Kashyap ❤️
+<!-- Students Here -->
 
 </div>
 
 </div>
 
-<script>
+</div>
 
-const cseSubjects=[
-"Computer Network",
-"Compiler Design",
-"Machine Learning",
-"Cryptography & Network Security",
-"Java Programming",
-"Python Lab",
-"CN Lab",
-"CD Lab"
-];
+<div class="card">
 
-const eceSubjects=[
-"Analog Electronics and IC",
-"Digital Circuits",
-"Electromagnetic Field Theory",
-"Analog Communication",
-"Electronics Materials",
-"NPTEL-I",
-"AEIC Lab",
-"Digital Circuit Lab",
-"Analog Comm Lab",
-"EMI Lab"
-];
+<h2>Attendance Summary</h2>
 
-const students=[
-"Rahul Kumar",
-"Aman Kumar",
-"Rohit Kumar",
-"Priya Kumari",
-"Anjali Kumari",
-"Neha Kumari",
-"Abhishek Kumar",
-"Sandeep Kumar"
-];
-];
-
-const branch=document.getElementById("branch");
-const subject=document.getElementById("subject");
-const attendanceArea=document.getElementById("attendanceArea");
-
-branch.addEventListener("change",()=>{
-
-subject.innerHTML="";
-
-let list=[];
-
-if(branch.value=="CSE"){
-list=cseSubjects;
-}
-
-if(branch.value=="ECE"){
-list=eceSubjects;
-}
-
-list.forEach(item=>{
-
-let option=document.createElement("option");
-option.textContent=item;
-option.value=item;
-
-subject.appendChild(option);
-
-});
-
-});
-
-function loadStudents(){
-
-attendanceArea.innerHTML="";
-
-let card=document.createElement("div");
-
-card.className="card";
-
-card.innerHTML=`
-
-<h2>${branch.value} - ${subject.value}</h2>
-
-`;
-
-students.forEach((name,index)=>{
-
-let row=document.createElement("div");
-
-row.className="student";
-
-row.innerHTML=`
+<div class="summary">
 
 <div>
 
-<b>${index+1}.</b>
+<h3 id="presentCount">0</h3>
 
-${name}
-
-</div>
-
-<div class="status">
-
-<button class="green"
-
-onclick="markPresent(${index})">
-
-Present
-
-</button>
-
-<button class="red"
-
-onclick="markAbsent(${index})">
-
-Absent
-
-</button>
+<p>Present</p>
 
 </div>
 
-`;
+<div>
 
-card.appendChild(row);
+<h3 id="absentCount">0</h3>
 
-});
+<p>Absent</p>
 
-card.innerHTML+=`
+</div>
 
-<br>
+<div>
 
-<button class="blue"
+<h3 id="percentage">0%</h3>
 
-onclick="saveAttendance()">
+<p>Attendance</p>
 
-Save Attendance
+</div>
 
-</button>
+</div>
 
-`;
-
-attendanceArea.appendChild(card);
-
-}
-
-let attendance={};
-
-function markPresent(id){
-
-attendance[id]="Present";
-
-event.target.parentElement.parentElement.style.background="#d7ffd9";
-
-}
-
-function markAbsent(id){
-
-attendance[id]="Absent";
-
-event.target.parentElement.parentElement.style.background="#ffd6d6";
-
-}
-  function saveAttendance(){
-
-let total=students.length;
-let present=0;
-let absent=0;
-
-students.forEach((name,index)=>{
-
-if(attendance[index]=="Present"){
-present++;
-}else{
-absent++;
-}
-
-});
-
-let percent=((present/total)*100).toFixed(2);
-
-let data={
-date:new Date().toLocaleDateString(),
-branch:branch.value,
-subject:subject.value,
-attendance:attendance,
-present:present,
-absent:absent,
-percentage:percent
-};
-
-localStorage.setItem("BEU_Attendance",JSON.stringify(data));
-
-alert(
-"Attendance Saved Successfully\n\n"+
-"Present : "+present+
-"\nAbsent : "+absent+
-"\nAttendance % : "+percent+"%"
-);
-
-showReport();
-
-}
-
-function showReport(){
-
-let data=JSON.parse(localStorage.getItem("BEU_Attendance"));
-
-if(!data) return;
-
-let report=document.createElement("div");
-
-report.className="card";
-
-report.innerHTML=`
-
-<h2>Attendance Report</h2>
-
-<p><b>Date :</b> ${data.date}</p>
-
-<p><b>Branch :</b> ${data.branch}</p>
-
-<p><b>Subject :</b> ${data.subject}</p>
-
-<p><b>Present :</b> ${data.present}</p>
-
-<p><b>Absent :</b> ${data.absent}</p>
-
-<p><b>Attendance % :</b> ${data.percentage}%</p>
-
-<button class="green" onclick="location.reload()">
-
-New Attendance
-
-</button>
-
-<button class="red" onclick="clearAttendance()">
-
-Clear Data
-
-</button>
-
-`;
-
-attendanceArea.appendChild(report);
-
-}
-
-function clearAttendance(){
-
-localStorage.removeItem("BEU_Attendance");
-
-alert("Attendance Cleared");
-
-location.reload();
-
-}
-
-window.onload=showReport;
-
-</script>
-
-</body>
-</html>
+</div>
